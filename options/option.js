@@ -4,15 +4,16 @@
 browser.storage.local.get("datas").then(gotdatas, onError);
 
 
-
+//保存数据
 $('.save').click(function(){
   adddata(this);
 });
 
-
+//删除
 $('.del').click(function(obj){
   console.log('删除');
 });
+//清除数据
 $('.clear').click(function(){
   browser.storage.local.clear();
   location.reload(); 
@@ -27,7 +28,7 @@ function setItem() {
 function onError(error) {
   console.log(error)
 }
-
+//获取数据添加到后台
 function gotdatas(item){
   if(item.datas==undefined){
     console.log('未定义');
@@ -50,14 +51,15 @@ function gotdatas(item){
     });
   }
 }
-
+//切断页面跳转
 $("button").click(function(event){
   event.preventDefault();
 });
+//重新加载侧边栏
 $('.reloadsidebar').click(function(){
   browser.sidebarAction.setPanel({panel: '../sidebar/sidebar.html'});
 });
-
+//后台新增数据
 var adddata=function(obj){
   console.log('新增');
   browser.storage.local.get("datas").then((item)=>{
@@ -69,15 +71,19 @@ var adddata=function(obj){
       var data=$(obj).parents('tr');
       datas=datagroup(data,datas);
       if(datas instanceof Array){
+        console.log('数组');
+        console.log(datas);
         browser.storage.local.set({datas:datas}).then(setItem,onError);
         browser.sidebarAction.setPanel({panel: '../sidebar/sidebar.html'});
         location.reload(); 
       }else{
+        console.log('非数组');
         geturlerror(datas);
       }
       
     }, onError);
 }
+//后台删除数据
 var deldata=function(obj){
   console.log('删除');
   var id=$(obj).parents('tr').find(".id").val();
@@ -90,6 +96,7 @@ var deldata=function(obj){
       location.reload(); 
     }, onError);
 }
+//提交数据过滤
 var datagroup=function(data,datas){
   var datainfos=[];
   datainfos['dataname']=data.find('.name').val();
@@ -109,11 +116,12 @@ var datagroup=function(data,datas){
   }
   
 }
-
+//判断是否是url
 function isURL(str){
   return true;
     return !!str.match(/(((^https?:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)$/g);
 }
+//错误提示
 function geturlerror(obj){
   console.log('不是网址提示');
   var id=$(obj).parents('tr').find('.id').val();
