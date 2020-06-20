@@ -1,0 +1,32 @@
+{
+  //清单版本
+  "manifest_version": 2,
+  //插件名称
+  "name": "SideTool1",
+  //版本
+  "version": "1.0.3",
+
+  "description": "将工具网站放入侧边栏方便访问",
+
+//插件图标
+  "icons": {
+    "48": "icons/border-48.png",
+    "128": "icons/border-128.png"
+  },
+  //申明选项页面
+  "options_ui": {
+  "page": "options/option.html",
+  "browser_style": true
+  },
+  //申明侧边栏
+  "sidebar_action": {
+    "default_title": "工具网站",
+    "default_panel": "sidebar/sidebar.html",
+    "default_icon": "icons/border-48.png"
+  },
+  //权限
+  "permissions": [
+    "storage"
+  ]
+
+}
