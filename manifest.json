@@ -4,7 +4,7 @@
   //插件名称
   "name": "SideTool1",
   //版本
-  "version": "1.0.3",
+  "version": "1.0.4",
 
   "description": "将工具网站放入侧边栏方便访问",
 
@@ -23,6 +23,14 @@
     "default_title": "工具网站",
     "default_panel": "sidebar/sidebar.html",
     "default_icon": "icons/border-48.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "48": "icons/border-48.png",
+      "128": "icons/border-128.png"
+    },
+    "default_popup": "options/option.html",
+    "default_title": "侧边网站"
   },
   //权限
   "permissions": [
